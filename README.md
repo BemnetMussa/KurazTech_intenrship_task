@@ -132,16 +132,3 @@ backend/
 **Built for KurazTech Internship Challenge** 🚀
 \`\`\`
 
-This README includes:
-
-- ✅ **Clear structure** with proper headings
-- ✅ **Feature list** with emojis for visual appeal
-- ✅ **API endpoints table** for easy reference
-- ✅ **Step-by-step setup** instructions
-- ✅ **Complete cURL examples** for testing
-- ✅ **Project structure** visualization
-- ✅ **Example responses** showing what to expect
-- ✅ **Technology stack** information
-- ✅ **Professional formatting** with code blocks and tables
-
-The markdown is properly formatted and will render beautifully on GitHub or any markdown viewer!
