@@ -21,6 +21,7 @@ Designed for the internship entrance challenge, focusing on solid TypeScript usa
 
 ---
 
+
 ## 📋 API Endpoints
 
 ### Get All Tasks
