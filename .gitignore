@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sw?
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional: test coverage
+coverage/
+
+# Optional: temporary files
+tmp/
+temp/
+*.tmp

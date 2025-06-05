@@ -1,0 +1,27 @@
+{
+  "name": "kuraze-tech",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BemnetMussa/KurazTech_intenrship_task.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BemnetMussa/KurazTech_intenrship_task/issues"
+  },
+  "homepage": "https://github.com/BemnetMussa/KurazTech_intenrship_task#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.29",
+    "express": "^5.1.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
