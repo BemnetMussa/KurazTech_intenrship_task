@@ -21,6 +21,7 @@ A RESTful API for managing tasks, built with Express.js and TypeScript.
 | `PUT` | `/api/tasks/:id` | Mark task as completed | - |
 | `DELETE` | `/api/tasks/:id` | Delete a task | - |
 
+
 ## Setup
 
 1. **Install dependencies:**
