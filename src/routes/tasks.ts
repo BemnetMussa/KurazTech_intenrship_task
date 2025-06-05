@@ -1,39 +1,44 @@
 import { Router, Request, Response } from 'express';
+import { taskList, Task } from '../data/taskData';
 
 const router = Router();
 
-// In-memory list of tasks
-let taskList = [
-  { id: 1, title: 'Buy groceries', completed: false },
-  { id: 2, title: 'Read a book', completed: true },
-];
-
 /**
  * @route   GET /api/tasks
- * @desc    Fetch all tasks
+ * @desc    Fetch all tasks with optional filtering by status (completed or pending)
  * @access  Public
  */
-router.get('/', async (req: Request, res: Response): Promise<void> => {
-  res.json(taskList);
+router.get('/', (req: Request, res: Response): void => {
+  const { status } = req.query;
+
+  let filteredTasks = taskList;
+
+  if (status === 'completed') {
+    filteredTasks = taskList.filter(task => task.completed === true);
+  } else if (status === 'pending') {
+    filteredTasks = taskList.filter(task => task.completed === false);
+  }
+
+  res.json(filteredTasks);
 });
 
 /**
  * @route   POST /api/tasks
- * @desc    Add a new task
+ * @desc    Add a new task with validation
  * @access  Public
  */
-router.post('/', async (req: Request, res: Response): Promise<void> => {
+router.post('/', (req: Request, res: Response): void => {
   const { title } = req.body;
 
-  // Validate input
-  if (!title || typeof title !== 'string') {
-    res.status(400).json({ error: 'Valid title is required' });
+  // Validate title exists and is not empty or whitespace-only
+  if (!title || typeof title !== 'string' || title.trim().length === 0) {
+    res.status(400).json({ error: 'Title is required and must not be empty' });
     return;
   }
 
-  const newTask = {
-    id: taskList.length + 1,
-    title,
+  const newTask: Task = {
+    id: taskList.length > 0 ? taskList[taskList.length - 1].id + 1 : 1,
+    title: title.trim(),
     completed: false,
   };
 
@@ -41,12 +46,9 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
   res.status(201).json(newTask);
 });
 
-/**
- * @route   PUT /api/tasks/:id
- * @desc    Mark a task as completed
- * @access  Public
- */
-router.put('/:id', async (req: Request, res: Response): Promise<void> => {
+// The rest of your routes remain unchanged
+
+router.put('/:id', (req: Request, res: Response): void => {
   const taskId = parseInt(req.params.id);
   const task = taskList.find(task => task.id === taskId);
 
@@ -59,18 +61,17 @@ router.put('/:id', async (req: Request, res: Response): Promise<void> => {
   res.json(task);
 });
 
-/**
- * @route   DELETE /api/tasks/:id
- * @desc    Delete a task by ID
- * @access  Public
- */
-router.delete('/:id', async (req: Request, res: Response): Promise<void> => {
+router.delete('/:id', (req: Request, res: Response): void => {
   const taskId = parseInt(req.params.id);
 
-  // Filter out the task with the matching ID
-  taskList = taskList.filter(task => task.id !== taskId);
+  const index = taskList.findIndex(task => task.id === taskId);
+  if (index === -1) {
+    res.status(404).json({ error: 'Task not found' });
+    return;
+  }
 
-  res.status(204).send(); // No content
+  taskList.splice(index, 1);
+  res.status(204).send();
 });
 
 export default router;
